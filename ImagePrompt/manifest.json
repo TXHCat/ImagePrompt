@@ -1,0 +1,57 @@
+{
+  "manifest_version": 3,
+  "name": "ImagePrompt - Local Image to Prompt",
+  "version": "0.1",
+  "description": "Analyze images with your local or OpenAI-compatible vision API and turn them into structured generation prompts.",
+  "action": {
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "ImagePrompt"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "js": [
+        "content/00-i18n.js",
+        "content/01-state.js",
+        "content/02-styles.js",
+        "content/03-history.js",
+        "content/04-targets.js",
+        "content/05-render.js",
+        "content/06-manual.js",
+        "content/07-screenshot.js",
+        "content/08-actions.js",
+        "content/09-analysis.js",
+        "content/99-bootstrap.js"
+      ],
+      "matches": ["http://*/*", "https://*/*"],
+      "run_at": "document_idle"
+    }
+  ],
+  "host_permissions": ["<all_urls>"],
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "permissions": ["contextMenus", "storage", "scripting", "activeTab", "clipboardWrite"],
+  "web_accessible_resources": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "resources": ["icons/history-icon.png"]
+    }
+  ]
+}
